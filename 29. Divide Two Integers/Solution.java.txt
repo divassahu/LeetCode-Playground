@@ -1,0 +1,33 @@
+class Solution {
+    public int divide(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+        return Integer.MAX_VALUE;
+    }
+    if (divisor == 1) {
+        return dividend;
+    }
+    
+    int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
+    
+    long dvd = Math.abs((long)dividend);
+    long dvs = Math.abs((long)divisor);
+    
+   
+    int result = 0;
+    long current = 1;
+    
+    while (dvd >= dvs) {
+        current = dvs;
+        int quotient = 1;
+        while (current << 1 <= dvd) {
+            current <<= 1;
+            quotient <<= 1;
+        }
+        dvd -= current;
+        result += quotient;
+    }
+    
+    return sign * result;
+    
+    }
+}
