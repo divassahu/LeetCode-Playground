@@ -1,0 +1,40 @@
+var divide = function(dividend, divisor) {
+    // Special case: divisor is 0
+    if (divisor === 0) {
+        return NaN;
+    }
+    
+    // Special case: dividend is 0
+    if (dividend === 0) {
+        return 0;
+    }
+    
+     // Special case: dividend is 1
+    if (divisor === 1){
+        return dividend;
+    }
+    
+    // Special case: dividend is the smallest negative number
+    if (dividend === -2147483648 && divisor === -1) {
+        return 2147483647;
+    }
+    
+    // Determine the sign of the result
+    var sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
+    
+    // Convert both dividend and divisor to positive numbers
+    var dvd = Math.abs(dividend);
+    var dvs = Math.abs(divisor);
+    
+    // Initialize the quotient to 0
+    var quotient = 0;
+    
+    // Subtract the divisor from the dividend until the dividend becomes less than the divisor
+    while (dvd >= dvs) {
+        dvd -= dvs;
+        quotient++;
+    }
+    
+    // Apply the sign to the quotient and return it
+    return sign * quotient;
+};
