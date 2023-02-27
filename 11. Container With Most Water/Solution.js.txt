@@ -1,0 +1,16 @@
+var maxArea = function(height) {
+    let r=height.length-1;
+    let l=0;
+    let area=0;
+    while(l<r){
+    let maxArea=Math.min(height[l],height[r])*(r-l);
+    area=Math.max(area,maxArea);
+        if(height[l]<height[r]){
+            l++;
+        }
+        else{
+              r--;
+        }
+    }    
+    return area;                                    
+};
