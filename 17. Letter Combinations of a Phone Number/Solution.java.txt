@@ -1,0 +1,25 @@
+class Solution {
+    private static final String[] LETTERS = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    private List<String> result = new ArrayList<>();
+    
+    public List<String> letterCombinations(String digits) {
+        if (digits == null || digits.length() == 0) {
+            return result; // Return an empty list if the input is invalid
+        }
+        backtrack(digits, 0, new StringBuilder()); // Call the backtrack method to generate all combinations
+        return result;
+    }
+    
+    private void backtrack(String digits, int index, StringBuilder combination) {
+        if (index == digits.length()) {
+            result.add(combination.toString()); // Add the combination to the result list if we have processed all digits
+            return;
+        }
+        String letters = LETTERS[digits.charAt(index) - '0']; // Get the letters corresponding to the current digit
+        for (int i = 0; i < letters.length(); i++) {
+            combination.append(letters.charAt(i)); // Append the current letter to the combination
+            backtrack(digits, index + 1, combination); // Recursively generate all combinations
+            combination.deleteCharAt(combination.length() - 1); // Backtrack by removing the current letter
+        }
+    }
+}
