@@ -1,0 +1,31 @@
+class Solution {
+    public String[] findWords(String[] words) {
+        String[] rows = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
+        List<String> result = new ArrayList<>();
+        
+        for (String word : words) {
+            boolean isOneRow = true;
+            String row = "";
+            
+            for (String r : rows) {
+                if (r.indexOf(Character.toLowerCase(word.charAt(0))) != -1) {
+                    row = r;
+                    break;
+                }
+            }
+            
+            for (int i = 1; i < word.length(); i++) {
+                if (row.indexOf(Character.toLowerCase(word.charAt(i))) == -1) {
+                    isOneRow = false;
+                    break;
+                }
+            }
+            
+            if (isOneRow) {
+                result.add(word);
+            }
+        }
+        
+        return result.toArray(new String[0]);
+    }
+}
