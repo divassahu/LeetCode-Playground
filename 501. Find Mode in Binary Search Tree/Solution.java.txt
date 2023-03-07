@@ -1,0 +1,39 @@
+class Solution {
+    int maxCount = 0;
+    int currentCount = 0;
+    int currentVal = 0;
+    
+    public int[] findMode(TreeNode root) {
+        List<Integer> modes = new ArrayList<>();
+        traverse(root, modes);
+        int[] result = new int[modes.size()];
+        for (int i = 0; i < modes.size(); i++) {
+            result[i] = modes.get(i);
+        }
+        return result;
+    }
+    
+    private void traverse(TreeNode node, List<Integer> modes) {
+        if (node == null) {
+            return;
+        }
+        traverse(node.left, modes);
+        handleValue(node.val, modes);
+        traverse(node.right, modes);
+    }
+    
+    private void handleValue(int val, List<Integer> modes) {
+        if (val != currentVal) {
+            currentVal = val;
+            currentCount = 0;
+        }
+        currentCount++;
+        if (currentCount > maxCount) {
+            maxCount = currentCount;
+            modes.clear();
+            modes.add(currentVal);
+        } else if (currentCount == maxCount) {
+            modes.add(currentVal);
+        }
+    }
+}
