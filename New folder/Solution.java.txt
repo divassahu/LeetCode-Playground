@@ -1,0 +1,6 @@
+public class Solution {
+    public int findComplement(int num) {
+        int mask = (Integer.highestOneBit(num) << 1) - 1; // creates a mask with all bits set up to the leftmost 1-bit in num
+        return num ^ mask; // performs bitwise XOR operation to flip all the bits in num
+    }
+}
