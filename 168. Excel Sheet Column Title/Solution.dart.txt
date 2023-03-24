@@ -1,0 +1,12 @@
+class Solution {
+  String convertToTitle(int columnNumber) {
+    StringBuffer sb = StringBuffer();
+    while (columnNumber > 0) {
+      columnNumber--;
+      int rem = columnNumber % 26;
+      sb.write(String.fromCharCode('A'.codeUnitAt(0) + rem));
+      columnNumber ~/= 26;
+    }
+    return sb.toString().split('').reversed.join();
+  }
+}
